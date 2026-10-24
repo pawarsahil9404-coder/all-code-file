@@ -1,7 +1,18 @@
 # 🚦 SignalAI — Municipal Traffic Control Portal
 
-> **Phase 1 Prototype** — UI Layout & Form Design  
-> An AI-driven smart traffic management system for urban intersections.
+> **Full-Stack Intelligent Traffic Management System**  
+> Real-time urban intersection monitoring, AI signal optimization, and priority emergency routing for Vadodara municipal corridors.
+
+---
+
+## 📚 Essential Documentation
+
+| Document | Purpose |
+| :--- | :--- |
+| [README.md](file:///Users/sahilp4514/Desktop/mini%20project/all%20code%20file/README.md) | Main Project Overview, Architecture, and Setup |
+| [INSTALLATION_GUIDE.md](file:///Users/sahilp4514/Desktop/mini%20project/all%20code%20file/INSTALLATION_GUIDE.md) | Complete macOS, PostgreSQL, Python, and Node environment setup |
+| [FACULTY_DEMO_GUIDE.md](file:///Users/sahilp4514/Desktop/mini%20project/all%20code%20file/FACULTY_DEMO_GUIDE.md) | Faculty Evaluation Guide, Test Script, and Walkthrough |
+| [docs/reports/](file:///Users/sahilp4514/Desktop/mini%20project/all%20code%20file/docs/reports) | Archive of Development Phase, API Integration, and Audit Reports |
 
 ---
 
@@ -15,28 +26,22 @@
 6. [🔐 Login Credentials (Demo)](#5--login-credentials-demo)
 7. [User Roles & Accounts](#6-user-roles--accounts)
 8. [Application Pages & Process Flow](#7-application-pages--process-flow)
-9. [Mock Data Reference](#8-mock-data-reference)
-10. [Navigation & Routing](#9-navigation--routing)
-11. [Design System](#10-design-system)
-12. [Development Phases](#11-development-phases)
-13. [Scripts](#12-scripts)
+9. [Navigation & Routing](#8-navigation--routing)
+10. [Design System](#9-design-system)
+11. [Scripts](#10-scripts)
 
 ---
 
 ## 1. Project Overview
 
-**SignalAI** is an advanced, AI-driven traffic management system designed for municipal traffic control centers. It provides operators and administrators with a centralized, intuitive interface to:
+**SignalAI** is an advanced traffic management platform designed for municipal traffic control centers. Connecting a modern React frontend with a high-performance FastAPI/PostgreSQL backend, it provides operators and administrators with:
 
-- 📍 Monitor intersections in real time (mocked data in Phase 1)
-- 📊 Analyze traffic flow with charts and analytics
-- 🤖 Review and approve/reject AI-generated signal optimization recommendations
-- 🚨 Activate emergency routing (Green Wave) for ambulances, fire trucks, and police
-- 💬 Query the AI assistant for traffic insights
-- 👥 Manage operator accounts and access levels (admin only)
-
-> **Note:** All data in Phase 1 is **simulated/mocked**. No real backend, database, or AI is connected yet. This phase focuses entirely on the frontend layout, UI structure, and form design.
-
----
+- 📍 Real-time intersection monitoring and junction status via TomTom Maps SDK
+- 📊 Live traffic flow analytics and volume trends
+- 🤖 AI-driven signal optimization recommendations (Review, Approve, or Reject)
+- 🚨 Emergency Green Wave activation for ambulances, fire engines, and police
+- 💬 Real-time SignalAI Assistant for traffic insights and queries
+- 👥 Role-based Access Control (Admin, Operator, Municipal, Emergency) with JWT authentication
 
 ## 📸 Screenshots
 
@@ -158,46 +163,42 @@ all code file/
 - **Node.js** v18 or higher
 - **npm** v9 or higher
 
-### Installation & Run
+### Quick Start (Automated)
+
+The project includes an automated startup script that launches both the FastAPI backend and the Vite frontend:
 
 ```bash
-# 1. Navigate to the project directory
-cd "all code file"
+# 1. Start all services
+bash start.sh
 
-# 2. Install dependencies
-npm install
-
-# 3. Start the development server
-npm run dev
+# 2. Stop all services when finished
+bash stop.sh
 ```
 
-The app will be available at **`http://localhost:5173`**
+- **Frontend:** [http://localhost:5173](http://localhost:5173)
+- **Backend API Docs (Swagger):** [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+- **Health Check:** [http://127.0.0.1:8000/api/health](http://127.0.0.1:8000/api/health)
+
+For full database installation and environment configuration steps, refer to [INSTALLATION_GUIDE.md](file:///Users/sahilp4514/Desktop/mini%20project/all%20code%20file/INSTALLATION_GUIDE.md).
 
 ---
 
 ## 5. 🔐 Login Credentials (Demo)
 
-> This is a **Phase 1 prototype**. Authentication is simulated with `localStorage`. No real backend exists yet.
+The system features real JSON Web Token (JWT) authentication backed by argon2/bcrypt password hashing in PostgreSQL:
 
 The login page is at: **`http://localhost:5173/login`**
 
-### ✅ Demo / Universal Access Credentials
+### 🔑 Demo Accounts Table
 
-| Field | Value |
-|---|---|
-| **Operator ID** | `demo` |
-| **Security Key (Password)** | `demo` |
+| Role | Email | Password | Privileges / Access |
+|---|---|---|---|
+| **System Administrator** | `r.mehta@signalai.gov.in` | `password123` | Full access, User Management (`/users`), Settings, Status Management |
+| **Traffic Operator** | `j.sharma@signalai.gov.in` | `password123` | Dashboard, Decisions Queue, Signal Timing, Traffic Map |
+| **Municipal Authority** | `s.gupta@municipal.gov.in` | `password123` | Analytics, Incident Reports, System Monitoring |
+| **Emergency Service** | `a.khan@emergency.gov.in` | `password123` | Emergency Green Corridors & Priority Routing |
 
-> These credentials grant access to the full application in Phase 1.
-
-### How Login Works (Phase 1 Logic)
-
-1. User enters Operator ID and Security Key on the Login page.
-2. A 1.2-second simulated authentication delay occurs.
-3. If credentials match `demo` / `demo` → `localStorage.setItem('signalai_auth', 'true')` is set.
-4. User is redirected to `/dashboard`.
-5. All other routes are **protected** — unauthenticated users are redirected to `/login`.
-6. To log out, the `signalai_auth` key is removed from `localStorage`.
+For faculty evaluation workflows and test scenarios, see [FACULTY_DEMO_GUIDE.md](file:///Users/sahilp4514/Desktop/mini%20project/all%20code%20file/FACULTY_DEMO_GUIDE.md).
 
 ---
 

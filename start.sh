@@ -49,8 +49,8 @@ echo "► Starting frontend (Vite) on http://localhost:5173 ..."
 cd "$PROJECT_DIR"
 deactivate 2>/dev/null
 
-# Launch Vite fully detached (subshell + nohup = proper macOS daemon)
-(nohup npx vite --port 5173 > "$PROJECT_DIR/frontend.log" 2>&1 &)
+# Launch Vite detached as a true daemon
+node -e "const fs = require('fs'), { spawn } = require('child_process'); const out = fs.openSync('$PROJECT_DIR/frontend.log', 'a'); const p = spawn('./node_modules/.bin/vite', ['--port', '5173'], { stdio: ['ignore', out, out], detached: true }); p.unref();"
 
 # Wait for Vite to respond
 echo "  Waiting for Vite..."
